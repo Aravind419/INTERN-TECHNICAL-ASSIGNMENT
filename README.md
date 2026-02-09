@@ -7,6 +7,11 @@
 - **Database**: SQLite
 - **API**: RESTful architecture
 
+## 🌐 Live Deployment
+- **Frontend**: https://intern-technical-assignment.vercel.app/
+- **Backend API**: https://intern-technical-assignment.onrender.com/api/facts/
+- **Status**: ✅ Fully Integrated & Deployed
+
 ---
 
 ## 📂 Project Structure
@@ -193,6 +198,19 @@ React DOM 19.2.4
 
 ## 🔧 Configuration
 
+### Environment Variables
+**Frontend** uses environment-specific API URLs:
+
+- **Production** (`.env.production`):
+  ```
+  REACT_APP_API_URL=https://intern-technical-assignment.onrender.com/api/facts/
+  ```
+
+- **Development** (`.env.development`):
+  ```
+  REACT_APP_API_URL=http://127.0.0.1:8000/api/facts/
+  ```
+
 ### CORS Settings
 **File**: `backend/config/settings.py`
 ```python
@@ -201,13 +219,15 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3001",
     "http://127.0.0.1:3000",
     "http://127.0.0.1:3001",
+    # Production - Vercel deployment
+    "https://intern-technical-assignment.vercel.app",
 ]
 ```
 
-### API URL
+### API URL (Automatic)
 **File**: `frontend/src/App.js`
 ```javascript
-const API_URL = 'http://127.0.0.1:8000/api/facts/';
+const API_URL = process.env.REACT_APP_API_URL || 'https://intern-technical-assignment.onrender.com/api/facts/';
 ```
 
 ---
