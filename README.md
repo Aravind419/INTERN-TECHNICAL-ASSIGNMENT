@@ -199,11 +199,39 @@ React DOM 19.2.4
 ## 🔧 Configuration
 
 ### Environment Variables
+
+#### Backend Environment Variables
+Create a `.env` file in the `backend/` directory (see `.env.example` for template):
+
+```bash
+# Production settings
+SECRET_KEY=your-secret-key-here-must-be-at-least-50-characters-long
+DEBUG=False
+ALLOWED_HOSTS=localhost,127.0.0.1,your-domain.com
+DATABASE_URL=postgres://user:password@host:port/database
+
+# CORS configuration
+FRONTEND_URL=https://your-frontend.vercel.app
+
+# Logging
+LOG_LEVEL=INFO
+DJANGO_LOG_LEVEL=INFO
+
+# SSL (set to False for local development)
+SECURE_SSL_REDIRECT=False
+```
+
+**Generate a new SECRET_KEY**:
+```bash
+python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+```
+
+#### Frontend Environment Variables
 **Frontend** uses environment-specific API URLs:
 
 - **Production** (`.env.production`):
   ```
-  REACT_APP_API_URL=https://intern-technical-assignment.onrender.com/api/facts/
+  REACT_APP_API_URL=https://your-backend.onrender.com/api/facts/
   ```
 
 - **Development** (`.env.development`):
@@ -211,24 +239,43 @@ React DOM 19.2.4
   REACT_APP_API_URL=http://127.0.0.1:8000/api/facts/
   ```
 
-### CORS Settings
-**File**: `backend/config/settings.py`
-```python
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://localhost:3001",
-    "http://127.0.0.1:3000",
-    "http://127.0.0.1:3001",
-    # Production - Vercel deployment
-    "https://intern-technical-assignment.vercel.app",
-]
-```
-
-### API URL (Automatic)
+### API URL Configuration
 **File**: `frontend/src/App.js`
 ```javascript
 const API_URL = process.env.REACT_APP_API_URL || 'https://intern-technical-assignment.onrender.com/api/facts/';
 ```
+
+---
+
+## 🚀 Production Deployment
+
+### Quick Deploy
+
+**Backend (Render)**:
+1. Create PostgreSQL database
+2. Deploy web service with `backend/` as root directory
+3. Set environment variables (SECRET_KEY, DATABASE_URL, etc.)
+4. Use `gunicorn config.wsgi:application` as start command
+
+**Frontend (Vercel)**:
+1. Import GitHub repository
+2. Set root directory to `frontend/`
+3. Add `REACT_APP_API_URL` environment variable
+4. Deploy
+
+### Detailed Instructions
+📖 **See [DEPLOYMENT.md](./DEPLOYMENT.md)** for complete step-by-step deployment guide including:
+- PostgreSQL setup on Render
+- Environment variable configuration
+- Custom domain setup
+- Troubleshooting common issues
+- Security best practices
+
+### Health Check
+After deployment, verify backend health:
+```bash
+curl https://your-backend.onrender.com/api/health/
+# Expected: {"status": "healthy", "database": "connected", "debug": false}
 
 ---
 
@@ -260,7 +307,7 @@ React will prompt to use another port - type 'Y'
 
 ## ✅ Project Status
 
-**Status**: ✅ ALL STEPS COMPLETED
+**Status**: ✅ **PRODUCTION READY** - Ready for deployment to Render + Vercel
 
 - [x] Virtual environment setup
 - [x] Django project created
@@ -274,6 +321,14 @@ React will prompt to use another port - type 'Y'
 - [x] UI components
 - [x] Error handling
 - [x] Responsive design
+- [x] **Production settings configured**
+- [x] **PostgreSQL support added**
+- [x] **Security hardening (DEBUG=False, SECRET_KEY from env)**
+- [x] **Static files configuration (WhiteNoise)**
+- [x] **Health check endpoint**
+- [x] **Deployment files (build.sh, runtime.txt)**
+- [x] **Vercel configuration**
+- [x] **Comprehensive deployment guide**
 
 ---
 
@@ -286,6 +341,7 @@ React will prompt to use another port - type 'Y'
 
 ---
 
-**Last Updated**: February 8, 2026  
+**Last Updated**: February 9, 2026  
 **Project Type**: Full-Stack Internship Assessment  
-**Status**: ✅ Production Ready
+**Status**: ✅ **Production Ready - Deploy to Render + Vercel**  
+**Deployment Guide**: [DEPLOYMENT.md](./DEPLOYMENT.md)
