@@ -48,7 +48,7 @@ function App() {
 
     // Call the fetch function
     fetchFacts();
-  }, []); // Empty dependency array means this runs once when component mounts
+  }, [API_URL]); // Run when component mounts or API_URL changes
 
   // Show loading message while fetching
   if (loading) {
