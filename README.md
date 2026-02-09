@@ -9,7 +9,8 @@
 
 ## 🌐 Live Deployment
 - **Frontend**: https://intern-technical-assignment.vercel.app/
-- **Backend API**: https://intern-technical-assignment.onrender.com/api/facts/
+- **Backend API**: https://intern-technical-assignment-1.onrender.com/api/facts/
+- **Health Check**: https://intern-technical-assignment-1.onrender.com/api/health/
 - **Status**: ✅ Fully Integrated & Deployed
 
 ---

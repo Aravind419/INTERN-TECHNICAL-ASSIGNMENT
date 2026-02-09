@@ -13,7 +13,7 @@ function App() {
 
   // API URL - Django backend endpoint
   // Uses environment variable, defaults to production Render URL
-  const API_URL = process.env.REACT_APP_API_URL || 'https://intern-technical-assignment.onrender.com/api/facts/';
+  const API_URL = process.env.REACT_APP_API_URL || 'https://intern-technical-assignment-1.onrender.com/api/facts/';
 
   // useEffect hook - runs when component mounts
   useEffect(() => {
